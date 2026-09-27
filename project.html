@@ -35678,7 +35678,8 @@
 							Noida.
 						</p>
 						<div class="bnxgroup_footer_socials d-flex gap-3">
-							<a href="#" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-instagram"></i></a>
+							<a href="https://www.instagram.com/thebnxgroup/" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-instagram"></i></a>
+							
 							<a href="#" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-twitter"></i></a>
 							<a href="#" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-linkedin-in"></i></a>
 						</div>
@@ -35810,6 +35811,48 @@
 		<script data-savepage-type="" type="text/plain"
 			data-savepage-src="https://img1.wsimg.com/traffic-assets/js/tccl.min.js"></script>
 	</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.getElementById("burger");
+    const menu = document.querySelector(".custom-menu");
+    const overlay = document.querySelector(".menu-overlay");
+
+    if (!burger || !menu) {
+        console.error("Burger or menu element not found");
+        return;
+    }
+
+    burger.addEventListener("click", function () {
+        burger.classList.toggle("active");
+        menu.classList.toggle("active");
+
+        if (overlay) {
+            overlay.classList.toggle("active");
+        }
+    });
+
+    // Close menu when overlay is clicked
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    }
+
+    // Close menu when a menu link is clicked
+    menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+
+            if (overlay) {
+                overlay.classList.remove("active");
+            }
+        });
+    });
+});
+</script>
 </body>
 
 </html>

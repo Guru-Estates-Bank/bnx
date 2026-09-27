@@ -35496,9 +35496,9 @@
 					</p>
 					<div
 						class="bnxgroup_bnx_hero_btns d-flex flex-column flex-sm-row justify-content-center gap-3 animate__animated animate__fadeInUp animate__delay-2s">
-						<a data-savepage-href="#" href="/#" class="btn bnxgroup_bnx_hero_btn_primary">EXPLORE
+						<a data-savepage-href="#" href="/project.html" class="btn bnxgroup_bnx_hero_btn_primary">EXPLORE
 							PROJECT</a>
-						<a data-savepage-href="#" href="/#" class="btn bnxgroup_bnx_hero_btn_outline">REGISTER
+						<a data-savepage-href="#" href="/#register_interest" class="btn bnxgroup_bnx_hero_btn_outline">REGISTER
 							INTEREST</a>
 					</div>
 				</div>
@@ -35608,7 +35608,7 @@
 								<p class="bnxgroup_section_home_3_card_text">
 									Space-optimized layouts with panoramic city views and premium bespoke finishes.
 								</p>
-								<a data-savepage-href="#" href="/#" class="bnxgroup_section_home_3_link">EXPLORE UNITS
+								<a data-savepage-href="#" href="/project.html" class="bnxgroup_section_home_3_link">EXPLORE UNITS
 									<span class="ms-2">→</span></a>
 							</div>
 						</div>
@@ -35630,7 +35630,7 @@
 									A sophisticated ecosystem of high-end brands, cafes, and dining experiences right at
 									your doorstep.
 								</p>
-								<a data-savepage-href="#" href="/#" class="bnxgroup_section_home_3_link">VIEW DIRECTORY
+								<a data-savepage-href="#" href="/project.html" class="bnxgroup_section_home_3_link">VIEW DIRECTORY
 									<span class="ms-2">→</span></a>
 							</div>
 						</div>
@@ -35824,7 +35824,7 @@
 
 							<div class="bnx-reveal-5"
 								style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
-								<a data-savepage-href="#" href="/#" class="btn bnxgroup_home_section_5_btn">DOWNLOAD
+								<a data-savepage-href="#" href="/broucher.pdf" class="btn bnxgroup_home_section_5_btn">DOWNLOAD
 									INVESTMENT KIT</a>
 							</div>
 						</div>
@@ -35835,7 +35835,7 @@
 		<!---//////////////////////////////////////////////////////-->
 		<!---//////////////////////////////////////////////////////-->
 		<!--- section 6 start -->
-		<section class="bnxgroup_home_section_6_wrapper py-5">
+		<section id="register_interest" class="bnxgroup_home_section_6_wrapper py-5">
 			<div class="container py-lg-5">
 				<div class="row g-0 bnxgroup_home_section_6_card shadow-lg bnx-reveal-6"
 					style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
@@ -35872,7 +35872,7 @@
 								<p role="status" aria-live="polite" aria-atomic="true"></p>
 								<ul></ul>
 							</div>
-							<form action="mailto:info@thebnxgroup.com" method="post" class="wpcf7-form init"
+							<form  id="interestForm"  method="post" class="wpcf7-form init"
 								aria-label="Contact form" novalidate="novalidate" data-status="init">
 								<fieldset class="hidden-fields-container"><input type="hidden" name="_wpcf7"
 										value="796"><input type="hidden" name="_wpcf7_version" value="6.1.7"><input
@@ -35970,8 +35970,8 @@
 							Noida.
 						</p>
 						<div class="bnxgroup_footer_socials d-flex gap-3">
-							<a data-savepage-href="#" href="/#" class="bnxgroup_footer_social_icon"><i
-									class="fa-brands fa-instagram"></i></a>
+							<a href="https://www.instagram.com/thebnxgroup/" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-instagram"></i></a>
+							
 							<a data-savepage-href="#" href="/#" class="bnxgroup_footer_social_icon"><i
 									class="fa-brands fa-twitter"></i></a>
 							<a data-savepage-href="#" href="/#" class="bnxgroup_footer_social_icon"><i
@@ -36080,6 +36080,109 @@
 		<script data-savepage-type="" type="text/plain"
 			data-savepage-src="https://img1.wsimg.com/traffic-assets/js/tccl.min.js"></script>
 	</div>
+	<script>
+document.getElementById("interestForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const form = this;
+    const submitButton = form.querySelector('input[type="submit"]');
+
+    const formData = new FormData(form);
+
+    const data = {
+        firstName: formData.get("first-name") || "",
+        lastName: formData.get("last-name") || "",
+        email: formData.get("email-address") || "",
+        phone: formData.get("phone-number") || "",
+        message: formData.get("message") || ""
+    };
+
+    console.log("Sending:", data);
+
+    if (!data.firstName || !data.lastName || !data.email || !data.phone) {
+        alert("Please fill in all required fields.");
+        return;
+    }
+
+    submitButton.disabled = true;
+    submitButton.value = "SUBMITTING...";
+
+    try {
+        const response = await fetch(
+            "http://localhost:3000/api/submit-data",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Submission failed.");
+        }
+
+        console.log("API response:", result);
+
+        alert("Thank you! Your enquiry has been submitted successfully.");
+
+        form.reset();
+
+    } catch (error) {
+        console.error("Submission error:", error);
+        alert("Unable to submit your enquiry. Please try again.");
+    } finally {
+        submitButton.disabled = false;
+        submitButton.value = "SUBMIT INTEREST";
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.getElementById("burger");
+    const menu = document.querySelector(".custom-menu");
+    const overlay = document.querySelector(".menu-overlay");
+
+    if (!burger || !menu) {
+        console.error("Burger or menu element not found");
+        return;
+    }
+
+    burger.addEventListener("click", function () {
+        burger.classList.toggle("active");
+        menu.classList.toggle("active");
+
+        if (overlay) {
+            overlay.classList.toggle("active");
+        }
+    });
+
+    // Close menu when overlay is clicked
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    }
+
+    // Close menu when a menu link is clicked
+    menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+
+            if (overlay) {
+                overlay.classList.remove("active");
+            }
+        });
+    });
+});
+</script>
 </body>
 
 </html>

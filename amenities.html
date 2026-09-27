@@ -35482,12 +35482,16 @@
 								wellness, and convenience into your daily life.
 							</p>
 							<div class="bns_amenities_section_one_buttons">
-								<a data-savepage-href="#" href="/amenities.html#"
-									class="bns_amenities_section_one_btn_primary">
-									Book a Site Visit
-									<i class="fas fa-arrow-right"></i>
-								</a>
-								<a data-savepage-href="#" href="/amenities.html#"
+								<a
+  href="https://wa.me/918282888888?text=Hi%2C%20I%20am%20interested%20in%20booking%20a%20site%20visit."
+  target="_blank"
+  rel="noopener noreferrer"
+  class="bns_amenities_section_one_btn_primary"
+>
+  Book a Site Visit
+  <i class="fas fa-arrow-right"></i>
+</a>
+								<a data-savepage-href="#" href="/contact.html"
 									class="bns_amenities_section_one_btn_outline">
 									Contact us for more details
 									<i class="fas fa-arrow-right"></i>
@@ -35735,8 +35739,8 @@
 							Noida.
 						</p>
 						<div class="bnxgroup_footer_socials d-flex gap-3">
-							<a data-savepage-href="#" href="/amenities.html#" class="bnxgroup_footer_social_icon"><i
-									class="fa-brands fa-instagram"></i></a>
+							<a href="https://www.instagram.com/thebnxgroup/" class="bnxgroup_footer_social_icon"><i class="fa-brands fa-instagram"></i></a>
+							
 							<a data-savepage-href="#" href="/amenities.html#" class="bnxgroup_footer_social_icon"><i
 									class="fa-brands fa-twitter"></i></a>
 							<a data-savepage-href="#" href="/amenities.html#" class="bnxgroup_footer_social_icon"><i
@@ -35845,6 +35849,48 @@
 		<script data-savepage-type="" type="text/plain"
 			data-savepage-src="https://img1.wsimg.com/traffic-assets/js/tccl.min.js"></script>
 	</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const burger = document.getElementById("burger");
+    const menu = document.querySelector(".custom-menu");
+    const overlay = document.querySelector(".menu-overlay");
+
+    if (!burger || !menu) {
+        console.error("Burger or menu element not found");
+        return;
+    }
+
+    burger.addEventListener("click", function () {
+        burger.classList.toggle("active");
+        menu.classList.toggle("active");
+
+        if (overlay) {
+            overlay.classList.toggle("active");
+        }
+    });
+
+    // Close menu when overlay is clicked
+    if (overlay) {
+        overlay.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+    }
+
+    // Close menu when a menu link is clicked
+    menu.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            burger.classList.remove("active");
+            menu.classList.remove("active");
+
+            if (overlay) {
+                overlay.classList.remove("active");
+            }
+        });
+    });
+});
+</script>
 </body>
 
 </html>
